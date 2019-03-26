@@ -1,6 +1,5 @@
 package com.zcsoft.rc.collectors.app.components.websocket;
 
-import com.zcsoft.rc.collectors.builders.model.entity.Builder;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInboundHandler;

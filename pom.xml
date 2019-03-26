@@ -12,9 +12,9 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.build.jdk.version>1.8</project.build.jdk.version>
 
-    <maven.project.com.sharingif.cube.version>4.0.0-RELEASE</maven.project.com.sharingif.cube.version>
+    <maven.cube.boot.groupId>com.sharingif.cube.spring.boot</maven.cube.boot.groupId>
+    <maven.project.com.sharingif.cube.spring.boot.version>4.0.0-RELEASE</maven.project.com.sharingif.cube.spring.boot.version>
 
-    <maven.project.springframework.groupId>org.springframework</maven.project.springframework.groupId>
     <maven.project.org.springframework.boot.groupId>org.springframework.boot</maven.project.org.springframework.boot.groupId>
     <maven.project.org.springframework.boot.release.version>1.5.3.RELEASE</maven.project.org.springframework.boot.release.version>
   </properties>
@@ -29,25 +29,11 @@
     </dependency>
 
     <dependency>
-      <groupId>com.sharingif.cube</groupId>
-      <artifactId>com.sharingif.cube.communication.http.apache</artifactId>
-      <version>${maven.project.com.sharingif.cube.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.sharingif.cube.spring.boot</groupId>
-      <artifactId>com.sharingif.cube.spring.boot.persistence.mybatis</artifactId>
-      <version>${maven.project.com.sharingif.cube.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.sharingif.cube.spring.boot</groupId>
-      <artifactId>com.sharingif.cube.spring.boot.security.web.spring</artifactId>
-      <version>${maven.project.com.sharingif.cube.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.sharingif.cube.spring.boot</groupId>
+      <groupId>${maven.cube.boot.groupId}</groupId>
       <artifactId>com.sharingif.cube.spring.boot.web.springmvc</artifactId>
-      <version>${maven.project.com.sharingif.cube.version}</version>
+      <version>${maven.project.com.sharingif.cube.spring.boot.version}</version>
     </dependency>
+
     <dependency>
       <groupId>${maven.project.org.springframework.boot.groupId}</groupId>
       <artifactId>spring-boot-starter-tomcat</artifactId>
