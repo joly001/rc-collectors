@@ -1,19 +1,19 @@
 package com.zcsoft.rc.collectors.zc.service;
 
-import com.zcsoft.rc.collectors.zc.model.entity.Zc;
+import com.zcsoft.rc.collectors.api.zc.entity.ZcReq;
 
 public interface ZcService {
 
     /**
      * 施工人员数据收集
-     * @param zc
+     * @param req
      */
-    void collectBuilder(Zc zc);
+    void collectBuilder(ZcReq req);
 
     /**
      * 司机数据收集
-     * @param zc
+     * @param req
      */
-    void collectDriver(Zc zc);
+    void collectDriver(ZcReq req);
 
 }

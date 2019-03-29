@@ -1,6 +1,6 @@
 package com.zcsoft.rc.collectors.zc.controller;
 
-import com.zcsoft.rc.collectors.zc.model.entity.Zc;
+import com.zcsoft.rc.collectors.api.zc.entity.ZcReq;
 import com.zcsoft.rc.collectors.zc.service.ZcService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,20 +22,20 @@ public class ZcController {
 
     /**
      * 施工人员数据收集
-     * @param zc
+     * @param req
      */
     @RequestMapping(value="collectBuilder", method= RequestMethod.POST)
-    public void collectBuilder(@Valid Zc zc) {
-        zcService.collectBuilder(zc);
+    public void collectBuilder(@Valid ZcReq req) {
+        zcService.collectBuilder(req);
     }
 
     /**
      * 司机数据收集
-     * @param zc
+     * @param req
      */
     @RequestMapping(value="collectDriver", method= RequestMethod.POST)
-    public void collectDriver(@Valid Zc zc) {
-        zcService.collectDriver(zc);
+    public void collectDriver(@Valid ZcReq req) {
+        zcService.collectDriver(req);
     }
 
 }
