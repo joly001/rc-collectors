@@ -23,8 +23,13 @@ public class CurrentRcServiceImpl implements CurrentRcService {
     }
 
     public CurrentRcMapRsp all() {
+        Map<String, CurrentRcRsp> copyRcMap = new ConcurrentHashMap<>(200);
+        copyRcMap.putAll(rcMap);
+
         CurrentRcMapRsp rsp = new CurrentRcMapRsp();
-        rsp.setRcMap(rcMap);
+        rsp.setRcMap(copyRcMap);
+
+        clear();
 
         return rsp;
     }
