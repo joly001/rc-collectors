@@ -22,7 +22,7 @@ public class RtkController {
     }
 
     /**
-     * 数据收集
+     * rtk数据收集
      */
     @RequestMapping(value="collect", method= RequestMethod.POST)
     public void collect(@Valid RtkCollectReq req) {

@@ -41,7 +41,7 @@ public class Bootstrap {
     @EnableTransactionManagement
     @EnableAutoConfiguration(exclude={WebMvcAutoConfiguration.class, HttpMessageConvertersAutoConfiguration.class})
     @ComponentScan(
-            basePackages = "com.zcsoft.rc.collectors.*.dao,com.zcsoft.rc.collectors.*.service,com.zcsoft.rc.collectors.app,com.sharingif.cube.spring.boot.*"
+            basePackages = "com.zcsoft.rc.*.dao,com.zcsoft.rc.collectors.*.service,com.zcsoft.rc.collectors.app,com.sharingif.cube.spring.boot.*"
             ,nameGenerator = ExtendedAnnotationBeanNameGenerator.class
             ,useDefaultFilters= false
             ,includeFilters={
