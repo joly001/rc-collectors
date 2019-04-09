@@ -21,21 +21,11 @@ public class ZcServiceImpl implements ZcService {
     }
 
     @Override
-    public void collectBuilder(ZcReq req) {
+    public void collect(ZcReq req) {
         Rc rc = new Rc();
         BeanUtils.copyProperties(req, rc);
-
-        rc.setType(User.BUILDER_USER_TYPE_WORK);
 
         rcService.collect(rc);
     }
 
-    @Override
-    public void collectDriver(ZcReq req) {
-        Rc rc = new Rc();
-        BeanUtils.copyProperties(req, rc);
-        rc.setType(User.BUILDER_USER_TYPE_TRAIN);
-
-        rcService.collect(rc);
-    }
 }
