@@ -3,35 +3,6 @@ package com.zcsoft.rc.collectors.app.components.websocket;
 public class Rc {
 
     /**
-     * 机车
-     */
-    public static final String TYPE_LOCOMOTIVE="00";
-    /**
-     * 列车
-     */
-    public static final String TYPE_TRAIN="01";
-    /**
-     * 施工人员
-     */
-    public static final String TYPE_BUILDER="02";
-    /**
-     * 安全防护员
-     */
-    public static final String TYPE_SAFETY_PROTECTOR="03";
-    /**
-     * 作业负责人
-     */
-    public static final String TYPE_LEADING_OFFICIAL="04";
-    /**
-     * 监理
-     */
-    public static final String TYPE_SUPERVISOR="05";
-    /**
-     * 其它人员
-     */
-    public static final String TYPE_OTHER="06";
-
-    /**
      * id
      */
     private String id;

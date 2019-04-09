@@ -2,16 +2,22 @@ package com.zcsoft.rc.collectors.zc.service.impl;
 
 import com.zcsoft.rc.collectors.api.zc.entity.ZcReq;
 import com.zcsoft.rc.collectors.app.components.websocket.Rc;
-import com.zcsoft.rc.collectors.app.components.websocket.WebSocketMessageApplication;
+import com.zcsoft.rc.collectors.rc.service.RcService;
 import com.zcsoft.rc.collectors.zc.service.ZcService;
+import com.zcsoft.rc.user.model.entity.User;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 @Service
 public class ZcServiceImpl implements ZcService {
 
-    protected void collect(Rc rc) {
-        WebSocketMessageApplication.sendMessage(rc);
+    private RcService rcService;
+
+    @Resource
+    public void setRcService(RcService rcService) {
+        this.rcService = rcService;
     }
 
     @Override
@@ -19,16 +25,17 @@ public class ZcServiceImpl implements ZcService {
         Rc rc = new Rc();
         BeanUtils.copyProperties(req, rc);
 
-        rc.setType(Rc.TYPE_BUILDER);
+        rc.setType(User.BUILDER_USER_TYPE_WORK);
 
-        collect(rc);
+        rcService.collect(rc);
     }
 
     @Override
     public void collectDriver(ZcReq req) {
         Rc rc = new Rc();
         BeanUtils.copyProperties(req, rc);
+        rc.setType(User.BUILDER_USER_TYPE_TRAIN);
 
-        collect(rc);
+        rcService.collect(rc);
     }
 }
