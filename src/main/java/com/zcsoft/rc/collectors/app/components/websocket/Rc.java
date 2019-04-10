@@ -11,6 +11,10 @@ public class Rc {
      */
     private String type;
     /**
+     * 手环编码
+     */
+    private String wristStrapCode;
+    /**
      * 经度
      */
     private Double longitude;
@@ -35,6 +39,14 @@ public class Rc {
         this.type = type;
     }
 
+    public String getWristStrapCode() {
+        return wristStrapCode;
+    }
+
+    public void setWristStrapCode(String wristStrapCode) {
+        this.wristStrapCode = wristStrapCode;
+    }
+
     public Double getLongitude() {
         return longitude;
     }
@@ -56,6 +68,7 @@ public class Rc {
         final StringBuilder sb = new StringBuilder("Rc{");
         sb.append("id='").append(id).append('\'');
         sb.append(", type='").append(type).append('\'');
+        sb.append(", wristStrapCode='").append(wristStrapCode).append('\'');
         sb.append(", longitude=").append(longitude);
         sb.append(", latitude=").append(latitude);
         sb.append('}');

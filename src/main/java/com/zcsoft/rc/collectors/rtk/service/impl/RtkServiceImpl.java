@@ -32,6 +32,7 @@ public class RtkServiceImpl implements RtkService {
         Rc rc = new Rc();
         rc.setId(user.getId());
         rc.setType(user.getBuilderUserType());
+        rc.setWristStrapCode(user.getWristStrapCode());
         rc.setLongitude(req.getLongitude());
         rc.setLatitude(req.getLatitude());
 
