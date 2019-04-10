@@ -57,6 +57,12 @@
       <version>4.1.34.Final</version>
     </dependency>
 
+    <dependency>
+      <groupId>org.apache.tomcat</groupId>
+      <artifactId>tomcat-dbcp</artifactId>
+      <version>8.5.14</version>
+    </dependency>
+
   </dependencies>
 
   <build>
