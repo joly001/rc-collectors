@@ -1,6 +1,7 @@
 package com.zcsoft.rc.collectors.warning.service.impl;
 
 import com.zcsoft.rc.collectors.api.warning.entity.WarningCollectReq;
+import com.zcsoft.rc.collectors.api.warning.entity.WarningDeleteReq;
 import com.zcsoft.rc.collectors.warning.service.WarningService;
 import org.springframework.stereotype.Service;
 
@@ -20,5 +21,10 @@ public class WarningServiceImpl implements WarningService {
     @Override
     public void collect(WarningCollectReq req) {
         warningMap.put(req.getId(), req.getWarning());
+    }
+
+    @Override
+    public void delete(WarningDeleteReq req) {
+        warningMap.remove(req.getId());
     }
 }

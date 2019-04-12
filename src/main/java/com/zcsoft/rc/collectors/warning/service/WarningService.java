@@ -1,6 +1,7 @@
 package com.zcsoft.rc.collectors.warning.service;
 
 import com.zcsoft.rc.collectors.api.warning.entity.WarningCollectReq;
+import com.zcsoft.rc.collectors.api.warning.entity.WarningDeleteReq;
 
 public interface WarningService {
 
@@ -16,5 +17,10 @@ public interface WarningService {
      * @param req
      */
     void collect(WarningCollectReq req);
+
+    /**
+     * 警告信息删除
+     */
+    void delete(WarningDeleteReq req);
 
 }
