@@ -22,6 +22,14 @@ public class Rc {
      * 维度
      */
     private Double latitude;
+    /**
+     * 警告状态
+     */
+    private Boolean warningStatus;
+    /**
+     * 警告信息
+     */
+    private String warning;
 
     public String getId() {
         return id;
@@ -63,6 +71,22 @@ public class Rc {
         this.latitude = latitude;
     }
 
+    public Boolean getWarningStatus() {
+        return warningStatus;
+    }
+
+    public void setWarningStatus(Boolean warningStatus) {
+        this.warningStatus = warningStatus;
+    }
+
+    public String getWarning() {
+        return warning;
+    }
+
+    public void setWarning(String warning) {
+        this.warning = warning;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Rc{");
@@ -71,6 +95,8 @@ public class Rc {
         sb.append(", wristStrapCode='").append(wristStrapCode).append('\'');
         sb.append(", longitude=").append(longitude);
         sb.append(", latitude=").append(latitude);
+        sb.append(", warningStatus=").append(warningStatus);
+        sb.append(", warning='").append(warning).append('\'');
         sb.append('}');
         return sb.toString();
     }
