@@ -11,7 +11,7 @@ import javax.annotation.Resource;
 
 
 @Controller
-@RequestMapping(value="workWarning")
+@RequestMapping(value="warning")
 public class WarningController {
 	
     private WarningService warningService;
