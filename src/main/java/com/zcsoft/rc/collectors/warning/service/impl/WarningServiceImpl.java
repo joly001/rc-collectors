@@ -11,20 +11,42 @@ import java.util.concurrent.ConcurrentHashMap;
 @Service
 public class WarningServiceImpl implements WarningService {
 
-    private Map<String, String> warningMap = new ConcurrentHashMap<>(200);
+    private Map<String, String> warningCordonMap = new ConcurrentHashMap<>(200);
+    private Map<String, String> warningtemporaryStation = new ConcurrentHashMap<>(200);
+    private Map<String, String> warningTrainApproaching = new ConcurrentHashMap<>(200);
 
     @Override
-    public String getWarning(String id) {
-        return warningMap.get(id);
+    public String getWarningCordon(String id) {
+        return warningCordonMap.get(id);
     }
 
     @Override
-    public void collect(WarningCollectReq req) {
-        warningMap.put(req.getId(), req.getWarning());
+    public void collectCordon(WarningCollectReq req) {
+        warningCordonMap.put(req.getId(), req.getWarning());
     }
 
     @Override
-    public void delete(WarningDeleteReq req) {
-        warningMap.remove(req.getId());
+    public void deleteCordon(WarningDeleteReq req) {
+        warningCordonMap.remove(req.getId());
+    }
+
+    @Override
+    public void collectTemporaryStation(WarningCollectReq req) {
+        warningtemporaryStation.put(req.getId(), req.getWarning());
+    }
+
+    @Override
+    public void deleteTemporaryStation(WarningDeleteReq req) {
+        warningtemporaryStation.remove(req.getId());
+    }
+
+    @Override
+    public void collectTrainApproaching(WarningCollectReq req) {
+        warningTrainApproaching.put(req.getId(), req.getWarning());
+    }
+
+    @Override
+    public void deleteTrainApproaching(WarningDeleteReq req) {
+        warningTrainApproaching.remove(req.getId());
     }
 }

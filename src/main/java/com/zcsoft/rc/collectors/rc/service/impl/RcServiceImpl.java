@@ -28,7 +28,7 @@ public class RcServiceImpl implements RcService {
 
     @Override
     public void collect(Rc rc) {
-        String warning =  warningService.getWarning(rc.getId());
+        String warning =  warningService.getWarningCordon(rc.getId());
 
         if(StringUtils.isTrimEmpty(warning)) {
             rc.setWarningStatus(false);
