@@ -25,6 +25,13 @@ public interface WarningService {
     void deleteCordon(WarningDeleteReq req);
 
     /**
+     * 根据id获取警告信息列车临站警告
+     * @param id
+     * @return
+     */
+    String getWarningTemporaryStation(String id);
+
+    /**
      * 警告信息收集列车临站警告
      * @param req
      */
@@ -35,6 +42,13 @@ public interface WarningService {
      * @param req
      */
     void deleteTemporaryStation(WarningDeleteReq req);
+
+    /**
+     * 根据id获取警告信息列车临站警告
+     * @param id
+     * @return
+     */
+    String getWarningTrainApproaching(String id);
 
     /**
      * 警告信息收集列车接近警告

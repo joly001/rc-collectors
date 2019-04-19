@@ -31,6 +31,11 @@ public class WarningServiceImpl implements WarningService {
     }
 
     @Override
+    public String getWarningTemporaryStation(String id) {
+        return warningtemporaryStation.get(id);
+    }
+
+    @Override
     public void collectTemporaryStation(WarningCollectReq req) {
         warningtemporaryStation.put(req.getId(), req.getWarning());
     }
@@ -38,6 +43,11 @@ public class WarningServiceImpl implements WarningService {
     @Override
     public void deleteTemporaryStation(WarningDeleteReq req) {
         warningtemporaryStation.remove(req.getId());
+    }
+
+    @Override
+    public String getWarningTrainApproaching(String id) {
+        return warningTrainApproaching.get(id);
     }
 
     @Override
