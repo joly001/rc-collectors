@@ -1,8 +1,8 @@
-package com.zcsoft.rc.collectors.app.components.websocket;
+package com.zcsoft.rc.collectors.app.components.tcp;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelInboundHandler;
+import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
@@ -17,20 +17,20 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 
 @Component
-public class WebsocketServer implements InitializingBean {
+public class TcpServer implements InitializingBean {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private int port;
-    private ChannelInboundHandler webSocketChannelInitializer;
+    private TcpServerChannelInitializer tcpServerChannelInitializer;
 
-    @Value("${websocket.port}")
+    @Value("${tcp.port}")
     public void setPort(int port) {
         this.port = port;
     }
     @Resource
-    public void setWebSocketChannelInitializer(ChannelInboundHandler webSocketChannelInitializer) {
-        this.webSocketChannelInitializer = webSocketChannelInitializer;
+    public void setTcpServerChannelInitializer(TcpServerChannelInitializer tcpServerChannelInitializer) {
+        this.tcpServerChannelInitializer = tcpServerChannelInitializer;
     }
 
     public void start() throws InterruptedException {
@@ -41,10 +41,11 @@ public class WebsocketServer implements InitializingBean {
             ServerBootstrap serverBootstrap = new ServerBootstrap();
             serverBootstrap.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class)
                     .handler(new LoggingHandler(LogLevel.DEBUG))
-                    .childHandler(webSocketChannelInitializer);
+                    .childOption(ChannelOption.SO_KEEPALIVE, true)
+                    .childHandler(tcpServerChannelInitializer);
 
             ChannelFuture channelFuture = serverBootstrap.bind(port).sync();
-            logger.info("Started server Websocket");
+            logger.info("Started server tcp");
             channelFuture.channel().closeFuture().sync();
         }finally{
             bossGroup.shutdownGracefully();
@@ -57,14 +58,15 @@ public class WebsocketServer implements InitializingBean {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                logger.info("Starting server Websocket");
+                logger.info("Starting server tcp");
                 try {
                     start();
                 } catch (InterruptedException e) {
-                    logger.error("Started server Websocket error");
+                    logger.error("Started server tcp error");
                 }
-                logger.info("Closed server Websocket");
+                logger.info("Closed server tcp");
             }
         }).start();
     }
+
 }
