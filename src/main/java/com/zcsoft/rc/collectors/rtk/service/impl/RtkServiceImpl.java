@@ -1,6 +1,7 @@
 package com.zcsoft.rc.collectors.rtk.service.impl;
 
 import com.zcsoft.rc.collectors.api.rtk.entity.RtkCollectReq;
+import com.zcsoft.rc.collectors.app.components.tcp.TcpServerApplication;
 import com.zcsoft.rc.collectors.app.components.websocket.Rc;
 import com.zcsoft.rc.collectors.machinery.service.MachineryService;
 import com.zcsoft.rc.collectors.rc.service.RcService;
@@ -10,6 +11,7 @@ import com.zcsoft.rc.machinery.model.entity.Machinery;
 import com.zcsoft.rc.user.model.entity.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -17,7 +19,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Service
-public class RtkServiceImpl implements RtkService {
+public class RtkServiceImpl implements RtkService, InitializingBean {
 
     protected final Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -103,4 +105,8 @@ public class RtkServiceImpl implements RtkService {
 
     }
 
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        TcpServerApplication.setRtkService(this);
+    }
 }

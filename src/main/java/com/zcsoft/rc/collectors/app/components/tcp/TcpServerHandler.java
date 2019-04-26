@@ -1,10 +1,11 @@
 package com.zcsoft.rc.collectors.app.components.tcp;
 
+import com.sharingif.cube.security.binary.HexCoder;
+import com.zcsoft.rc.collectors.api.rtk.entity.RtkCollectReq;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-import io.netty.util.CharsetUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,17 +13,39 @@ public class TcpServerHandler extends SimpleChannelInboundHandler<ByteBuf> {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    private HexCoder hexCoder = new HexCoder();
+
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         ctx.fireChannelActive();
     }
 
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, ByteBuf msg) throws Exception {
-        String received = msg.toString(CharsetUtil.UTF_8);
-        logger.info("Server received:{}",received);
+    protected void channelRead0(ChannelHandlerContext ctx, ByteBuf byteBuf) throws Exception {
+        byte[] msgByte = new byte[byteBuf.readableBytes()];
+        byteBuf.readBytes(msgByte);
+        logger.info("received msg:{}",new String(msgByte));
+        logger.info("received msg byte, msg:{}", hexCoder.encode(msgByte));
 
-//        ctx.write(Unpooled.copiedBuffer("Hello " + received, CharsetUtil.UTF_8));
+        String msgString = new String(msgByte);
+        String[] msgArray = msgString.split("\r\n");
+
+        String sn = msgArray[0];
+        sn = sn.substring(4,sn.length()-3);
+
+        String gngga = msgArray[1];
+        String[] gnggaArray = gngga.split(",");
+        double longitude = Double.valueOf(gnggaArray[4]);
+        double latitude = Double.valueOf(gnggaArray[2]);
+
+        RtkCollectReq req = new RtkCollectReq();
+        req.setId(sn);
+        req.setLongitude(longitude);
+        req.setLatitude(latitude);
+
+        logger.info("rtk req:{}",req);
+
+        TcpServerApplication.collect(req);
     }
 
     @Override

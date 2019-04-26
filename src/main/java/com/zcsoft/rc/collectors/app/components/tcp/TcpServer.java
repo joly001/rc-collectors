@@ -41,8 +41,9 @@ public class TcpServer implements InitializingBean {
             ServerBootstrap serverBootstrap = new ServerBootstrap();
             serverBootstrap.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class)
                     .handler(new LoggingHandler(LogLevel.DEBUG))
+                    .childHandler(tcpServerChannelInitializer)
                     .childOption(ChannelOption.SO_KEEPALIVE, true)
-                    .childHandler(tcpServerChannelInitializer);
+                    .option(ChannelOption.SO_BACKLOG, 128);
 
             ChannelFuture channelFuture = serverBootstrap.bind(port).sync();
             logger.info("Started server tcp");
