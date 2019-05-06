@@ -46,6 +46,8 @@ public class TcpServerHandler extends SimpleChannelInboundHandler<ByteBuf> {
         logger.info("rtk req:{}",req);
 
         TcpServerApplication.collect(req);
+
+
     }
 
     @Override
@@ -61,7 +63,7 @@ public class TcpServerHandler extends SimpleChannelInboundHandler<ByteBuf> {
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        logger.info("channel connection error,channelId:{}", ctx.channel().id().asLongText());
+        logger.info("channel connection error,channelId:{}", ctx.channel().id().asLongText(), cause);
         ctx.channel().close();
     }
 
