@@ -9,13 +9,13 @@ import org.springframework.stereotype.Component;
 import java.util.concurrent.TimeUnit;
 
 @Component
-public class TcpServerChannelInitializer extends ChannelInitializer<SocketChannel> {
+public class P3duTcpServerChannelInitializer extends ChannelInitializer<SocketChannel> {
 
     @Override
     protected void initChannel(SocketChannel ch) throws Exception {
         ChannelPipeline pipeline = ch.pipeline();
         pipeline.addLast(new IdleStateHandler(15, 0, 0, TimeUnit.MINUTES));
-        pipeline.addLast(new TcpServerHandler());
+        pipeline.addLast(new P3duTcpServerHandler());
     }
 
 }

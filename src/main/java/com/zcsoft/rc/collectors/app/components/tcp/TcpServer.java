@@ -2,35 +2,31 @@ package com.zcsoft.rc.collectors.app.components.tcp;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
-
-@Component
 public class TcpServer implements InitializingBean {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private int port;
-    private TcpServerChannelInitializer tcpServerChannelInitializer;
+    private ChannelInitializer<SocketChannel> channelInitializer;
 
-    @Value("${tcp.port}")
     public void setPort(int port) {
         this.port = port;
     }
-    @Resource
-    public void setTcpServerChannelInitializer(TcpServerChannelInitializer tcpServerChannelInitializer) {
-        this.tcpServerChannelInitializer = tcpServerChannelInitializer;
+
+    public void setChannelInitializer(ChannelInitializer<SocketChannel> channelInitializer) {
+        this.channelInitializer = channelInitializer;
     }
 
     public void start() throws InterruptedException {
@@ -41,7 +37,7 @@ public class TcpServer implements InitializingBean {
             ServerBootstrap serverBootstrap = new ServerBootstrap();
             serverBootstrap.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class)
                     .handler(new LoggingHandler(LogLevel.DEBUG))
-                    .childHandler(tcpServerChannelInitializer)
+                    .childHandler(channelInitializer)
                     .childOption(ChannelOption.SO_KEEPALIVE, true)
                     .option(ChannelOption.SO_BACKLOG, 128);
 

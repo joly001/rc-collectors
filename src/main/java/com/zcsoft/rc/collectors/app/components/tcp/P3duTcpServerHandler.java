@@ -9,7 +9,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TcpServerHandler extends SimpleChannelInboundHandler<ByteBuf> {
+public class P3duTcpServerHandler extends SimpleChannelInboundHandler<ByteBuf> {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -33,10 +33,10 @@ public class TcpServerHandler extends SimpleChannelInboundHandler<ByteBuf> {
         String sn = msgArray[0];
         sn = sn.substring(4,sn.length()-3);
 
-        String gngga = msgArray[1];
-        String[] gnggaArray = gngga.split(",");
-        double longitude = Double.valueOf(gnggaArray[4]);
-        double latitude = Double.valueOf(gnggaArray[2]);
+        String gphcd = msgArray[1];
+        String[] gphcdArray = gphcd.split(",");
+        double longitude = Double.valueOf(gphcdArray[10]);
+        double latitude = Double.valueOf(gphcdArray[9]);
 
         RtkCollectReq req = new RtkCollectReq();
         req.setId(sn);
