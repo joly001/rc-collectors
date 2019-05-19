@@ -63,7 +63,7 @@ public class P3duTcpServerHandler extends SimpleChannelInboundHandler<ByteBuf> {
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        logger.info("channel connection error,channelId:{}", ctx.channel().id().asLongText(), cause);
+        logger.error("channel connection error,channelId:{}", ctx.channel().id().asLongText(), cause);
         ctx.channel().close();
     }
 
