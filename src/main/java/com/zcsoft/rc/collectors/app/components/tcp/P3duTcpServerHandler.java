@@ -44,6 +44,9 @@ public class P3duTcpServerHandler extends SimpleChannelInboundHandler<ByteBuf> {
         req.setLatitude(latitude);
 
         logger.info("rtk req:{}",req);
+        req.setLongitude(Double.valueOf(GPSFormatUtils.GPHCDFormat(req.getLongitude().toString())));
+        req.setLatitude(Double.valueOf(GPSFormatUtils.GPHCDFormat(req.getLatitude().toString())));
+        logger.info("rtk req转换后信息:{}",req);
 
         TcpServerApplication.collect(req);
 

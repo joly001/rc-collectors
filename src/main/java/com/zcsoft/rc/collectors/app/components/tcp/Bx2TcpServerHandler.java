@@ -44,6 +44,9 @@ public class Bx2TcpServerHandler extends SimpleChannelInboundHandler<ByteBuf> {
         req.setLatitude(latitude);
 
         logger.info("rtk req:{}",req);
+        req.setLongitude(Double.valueOf(GPSFormatUtils.GGAFormat(req.getLongitude().toString())));
+        req.setLatitude(Double.valueOf(GPSFormatUtils.GGAFormat(req.getLatitude().toString())));
+        logger.info("rtk req转换后信息:{}",req);
 
         TcpServerApplication.collect(req);
 
