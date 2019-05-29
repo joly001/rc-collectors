@@ -4,12 +4,16 @@ import com.sharingif.cube.core.util.StringUtils;
 import com.zcsoft.rc.collectors.api.warning.entity.WarningCollectReq;
 import com.zcsoft.rc.collectors.app.components.websocket.Rc;
 import com.zcsoft.rc.collectors.app.components.websocket.WebSocketMessageApplication;
+import com.zcsoft.rc.collectors.app.components.websocket.geojson.GeoJson;
+import com.zcsoft.rc.collectors.app.components.websocket.geojson.Geometry;
+import com.zcsoft.rc.collectors.app.components.websocket.geojson.Properties;
 import com.zcsoft.rc.collectors.rc.service.CurrentRcService;
 import com.zcsoft.rc.collectors.rc.service.RcService;
 import com.zcsoft.rc.collectors.warning.service.WarningService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
 
 @Service
 public class RcServiceImpl implements RcService {
@@ -45,6 +49,26 @@ public class RcServiceImpl implements RcService {
 
         currentRcService.add(rc);
 
-        WebSocketMessageApplication.sendMessage(rc);
+        GeoJson geoJson = new GeoJson();
+        geoJson.setType("Feature");
+
+        Properties properties = new Properties();
+        properties.setId(rc.getId());
+        properties.setX(rc.getLongitude());
+        properties.setY(rc.getLatitude());
+        properties.setType(rc.getType());
+        properties.setWristStrapCode(rc.getWristStrapCode());
+        properties.setWarningStatus(rc.getWarningStatus());
+        properties.setWarning(rc.getWarning());
+        geoJson.setProperties(properties);
+
+
+        Geometry geometry = new Geometry();
+        geometry.setType("Point");
+        geometry.setCoordinates(Arrays.asList(rc.getLongitude(),rc.getLatitude()));
+        geoJson.setGeometry(geometry);
+
+
+        WebSocketMessageApplication.sendMessage(geoJson);
     }
 }

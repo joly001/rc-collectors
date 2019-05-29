@@ -31,16 +31,20 @@ public class WebSocketHandler extends SimpleChannelInboundHandler<TextWebSocketF
 
     @Override
     public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
-        logger.info("removed channel,channelId:{}", ctx.channel().id().asLongText());
+        Channel channel = ctx.channel();
 
-        WebSocketMessageApplication.removeChannel();
+        logger.info("removed channel,channelId:{}", channel.id().asLongText());
+
+        WebSocketMessageApplication.removeChannel(channel);
     }
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        logger.info("channel connection error,channelId:{}", ctx.channel().id().asLongText(), cause);
-        ctx.channel().close();
+        Channel channel = ctx.channel();
 
-        WebSocketMessageApplication.removeChannel();
+        logger.error("channel connection error,channelId:{}", channel.id().asLongText(), cause);
+        channel.close();
+
+        WebSocketMessageApplication.removeChannel(channel);
     }
 }
