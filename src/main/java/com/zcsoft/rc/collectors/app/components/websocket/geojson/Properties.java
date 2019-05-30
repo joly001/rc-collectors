@@ -7,7 +7,7 @@ public class Properties {
     private Double y;
     private String type;
     private String wristStrapCode;
-    private Boolean warningStatus;
+    private String warningStatus;
     private String warning;
 
     public String getId() {
@@ -50,11 +50,11 @@ public class Properties {
         this.wristStrapCode = wristStrapCode;
     }
 
-    public Boolean getWarningStatus() {
+    public String getWarningStatus() {
         return warningStatus;
     }
 
-    public void setWarningStatus(Boolean warningStatus) {
+    public void setWarningStatus(String warningStatus) {
         this.warningStatus = warningStatus;
     }
 

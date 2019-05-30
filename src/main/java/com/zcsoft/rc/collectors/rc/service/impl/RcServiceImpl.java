@@ -58,7 +58,7 @@ public class RcServiceImpl implements RcService {
         properties.setY(rc.getLatitude());
         properties.setType(rc.getType());
         properties.setWristStrapCode(rc.getWristStrapCode());
-        properties.setWarningStatus(rc.getWarningStatus());
+        properties.setWarningStatus(rc.getWarningStatus().toString());
         properties.setWarning(rc.getWarning());
         geoJson.setProperties(properties);
 
