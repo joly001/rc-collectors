@@ -49,26 +49,26 @@ public class RcServiceImpl implements RcService {
 
         currentRcService.add(rc);
 
-        GeoJson geoJson = new GeoJson();
-        geoJson.setType("Feature");
+//        GeoJson geoJson = new GeoJson();
+//        geoJson.setType("Feature");
+//
+//        Properties properties = new Properties();
+//        properties.setId(rc.getId());
+//        properties.setX(rc.getLongitude());
+//        properties.setY(rc.getLatitude());
+//        properties.setType(rc.getType());
+//        properties.setWristStrapCode(rc.getWristStrapCode());
+//        properties.setWarningStatus(rc.getWarningStatus().toString());
+//        properties.setWarning(rc.getWarning());
+//        geoJson.setProperties(properties);
+//
+//
+//        Geometry geometry = new Geometry();
+//        geometry.setType("Point");
+//        geometry.setCoordinates(Arrays.asList(rc.getLongitude(),rc.getLatitude()));
+//        geoJson.setGeometry(geometry);
 
-        Properties properties = new Properties();
-        properties.setId(rc.getId());
-        properties.setX(rc.getLongitude());
-        properties.setY(rc.getLatitude());
-        properties.setType(rc.getType());
-        properties.setWristStrapCode(rc.getWristStrapCode());
-        properties.setWarningStatus(rc.getWarningStatus().toString());
-        properties.setWarning(rc.getWarning());
-        geoJson.setProperties(properties);
 
-
-        Geometry geometry = new Geometry();
-        geometry.setType("Point");
-        geometry.setCoordinates(Arrays.asList(rc.getLongitude(),rc.getLatitude()));
-        geoJson.setGeometry(geometry);
-
-
-        WebSocketMessageApplication.sendMessage(geoJson);
+        WebSocketMessageApplication.sendMessage(rc);
     }
 }

@@ -17,7 +17,6 @@ public class WebSocketMessageApplication {
     private static ObjectMapper objectMapper = new ObjectMapper();
 
     private static ConcurrentHashMap<String, Channel> channelMap = new ConcurrentHashMap();
-    private static Channel channel;
 
     public static void addChannel(Channel channel){
         channelMap.put(channel.id().asLongText(), channel);
